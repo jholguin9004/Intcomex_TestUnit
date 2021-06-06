@@ -64,8 +64,8 @@ class UnitTestActions extends \Magento\Ui\Component\Listing\Columns\Column
                             ),
                             'label' => __('Delete'),
                             'confirm' => [
-                                'title' => __("Delete %s", $item['id']),
-                                'message' => __("Are you sure you wan't to delete a %s record?", $item['id'])
+                                'title' => __("Delete %1", $item['id']),
+                                'message' => __("Are you sure you wan't to delete the '%1' record?", $item['id'])
                             ]
                         ]
                     ];
