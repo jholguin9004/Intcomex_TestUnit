@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">intcomex_unittest_unittest_model_listing.intcomex_unittest_unittest_model_listing_data_source</item>
+		</item>
+	</argument>
+	<settings>
+		<spinner>intcomex_unittest_unittest_model_columns</spinner>
+		<deps>
+			<dep>intcomex_unittest_unittest_model_listing.intcomex_unittest_unittest_model_listing_data_source</dep>
+		</deps>
+        <buttons>
+			<button name="add">
+				<url path="*/*/new"/>
+				<class>primary</class>
+				<label translate="true">Add new Unit Test</label>
+			</button>
+		</buttons>
+	</settings>
+	<dataSource name="intcomex_unittest_unittest_model_listing_data_source" component="Magento_Ui/js/grid/provider">
+		<settings>
+			<storageConfig>
+				<param name="indexField" xsi:type="string">id</param>
+			</storageConfig>
+			<updateUrl path="mui/index/render"/>
+		</settings>
+		<aclResource>Intcomex_UnitTest::intcomex_unittest_unittest_list</aclResource>
+		<dataProvider name="intcomex_unittest_unittest_model_listing_data_source" class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+			<settings>
+				<requestFieldName>id</requestFieldName>
+				<primaryFieldName>id</primaryFieldName>
+			</settings>
+		</dataProvider>
+	</dataSource>
+	<listingToolbar name="listing_top">
+		<settings>
+			<sticky>true</sticky>
+		</settings>
+		<bookmark name="bookmarks"/>
+		<columnsControls name="columns_controls"/>
+		<filters name="listing_filters"/>
+		<paging name="listing_paging"/>
+		<exportButton name="export_button">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="selectProvider" xsi:type="string">intcomex_unittest_unittest_model_listing.intcomex_unittest_unittest_model_listing.intcomex_unittest_unittest_model_columns.ids</item>
+                </item>
+            </argument>
+        </exportButton>
+	</listingToolbar>
+	<columns name="intcomex_unittest_unittest_model_columns">
+		<selectionsColumn name="ids">
+			<settings>
+				<indexField>id</indexField>
+			</settings>
+		</selectionsColumn>
+		<column name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">textRange</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" xsi:type="string" translate="true">ID</item>
+                </item>
+            </argument>
+            <settings>
+                <sorting>desc</sorting>
+			</settings>
+        </column>
+        <column name="name">
+			<argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Name</item>
+                </item>
+            </argument>
+		</column>
+		<column name="status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                </item>
+            </argument>
+        </column>
+	</columns>
+</listing>
