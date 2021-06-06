@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="intcomex_unittest_listing_data_source" xsi:type="string">Intcomex\UnitTest\Model\ResourceModel\UnitTest\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+	<virtualType name="Intcomex\UnitTest\Model\ResourceModel\UnitTest\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">intcomex_unittest</argument>
+			<argument name="resourceModel" xsi:type="string">Intcomex\UnitTest\Model\ResourceModel\UnitTest\Collection</argument>
+		</arguments>
+	</virtualType>
+</config>
