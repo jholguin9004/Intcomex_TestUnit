@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table name="intcomex_unittest" resource="default" engine="innodb" comment="Table Intcomex Unittest">
+		<column xsi:type="bigint" name="id" padding="6" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+		<constraint xsi:type="primary" referenceId="PRIMARY">
+			<column name="id"/>
+		</constraint>
+		<column name="name" nullable="true" xsi:type="varchar" comment="name" length="50"/>
+		<column name="description" nullable="true" xsi:type="varchar" comment="description" length="250"/>
+		<column name="status" nullable="false" xsi:type="varchar" comment="description" length="250" default="pending"/>
+	</table>
+</schema>
