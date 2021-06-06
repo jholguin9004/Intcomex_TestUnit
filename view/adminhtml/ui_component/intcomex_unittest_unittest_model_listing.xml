@@ -2,13 +2,13 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
 	<argument name="data" xsi:type="array">
 		<item name="js_config" xsi:type="array">
-			<item name="provider" xsi:type="string">intcomex_unittest_unittest_model_listing.intcomex_unittest_unittest_model_listing_data_source</item>
+			<item name="provider" xsi:type="string">intcomex_unittest_unittest_model_listing.intcomex_unittest_listing_data_source</item>
 		</item>
 	</argument>
 	<settings>
 		<spinner>intcomex_unittest_unittest_model_columns</spinner>
 		<deps>
-			<dep>intcomex_unittest_unittest_model_listing.intcomex_unittest_unittest_model_listing_data_source</dep>
+			<dep>intcomex_unittest_unittest_model_listing.intcomex_unittest_listing_data_source</dep>
 		</deps>
         <buttons>
 			<button name="add">
@@ -18,7 +18,7 @@
 			</button>
 		</buttons>
 	</settings>
-	<dataSource name="intcomex_unittest_unittest_model_listing_data_source" component="Magento_Ui/js/grid/provider">
+	<dataSource name="intcomex_unittest_listing_data_source" component="Magento_Ui/js/grid/provider">
 		<settings>
 			<storageConfig>
 				<param name="indexField" xsi:type="string">id</param>
@@ -26,7 +26,7 @@
 			<updateUrl path="mui/index/render"/>
 		</settings>
 		<aclResource>Intcomex_UnitTest::intcomex_unittest_unittest_list</aclResource>
-		<dataProvider name="intcomex_unittest_unittest_model_listing_data_source" class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+		<dataProvider name="intcomex_unittest_listing_data_source" class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
 			<settings>
 				<requestFieldName>id</requestFieldName>
 				<primaryFieldName>id</primaryFieldName>

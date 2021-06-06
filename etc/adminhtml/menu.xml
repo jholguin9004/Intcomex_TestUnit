@@ -6,7 +6,7 @@
 			title="Intcomex" 
 			module="Intcomex_UnitTest" 
 			sortOrder="10" 
-			resource="Formax_Backend::Formax" 
+			resource="Intcomex_UnitTest::UnitTest" 
 		/>
 		<add 
 			id="Intcomex_UnitTest::UnitTest_Model" 
