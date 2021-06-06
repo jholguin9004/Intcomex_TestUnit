@@ -48,6 +48,26 @@
                 </item>
             </argument>
         </exportButton>
+		<massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+                </item>
+            </argument>
+			<action name="delete">
+				<argument name="data" xsi:type="array">
+					<item name="config" xsi:type="array">
+						<item name="type" xsi:type="string">delete</item>
+						<item name="label" xsi:type="string" translate="true">Delete</item>
+						<item name="url" xsi:type="url" path="*/*/massDelete"/>
+						<item name="confirm" xsi:type="array">
+							<item name="title" xsi:type="string" translate="true">Delete Unit Test</item>
+							<item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
+						</item>
+					</item>
+				</argument>
+			</action>
+		</massaction>
 	</listingToolbar>
 	<columns name="intcomex_unittest_unittest_model_columns">
 		<selectionsColumn name="ids">
@@ -86,5 +106,12 @@
                 </item>
             </argument>
 		</column>
+		<actionsColumn name="actions" class="Intcomex\UnitTest\Ui\Component\Listing\Column\UnitTestActions">
+			<settings>
+				<indexField>id</indexField>
+				<resizeEnabled>false</resizeEnabled>
+				<resizeDefaultWidth>107</resizeDefaultWidth>
+			</settings>
+		</actionsColumn>
 	</columns>
 </listing>
