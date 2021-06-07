@@ -9,6 +9,7 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Intcomex\UnitTest\Helper\SaveValidations;
+use Magento\Framework\Event\ManagerInterface as EventManager;
 
 class UnitTestRepository implements UnitTestRepositoryInterface
 {
@@ -20,6 +21,8 @@ class UnitTestRepository implements UnitTestRepositoryInterface
 
     protected $saveValidations;
 
+    private $eventManager;
+
     /**
      * @param ExtensibleDataObjectConverter $extensibleDataObjectConverter
      * @param UnitTestFactory $unitTestFactory
@@ -29,12 +32,14 @@ class UnitTestRepository implements UnitTestRepositoryInterface
         ExtensibleDataObjectConverter $extensibleDataObjectConverter,
         UnitTestFactory $unitTestFactory,
         ResourceUnitTest $resource,
-        SaveValidations $saveValidations
+        SaveValidations $saveValidations,
+        EventManager $eventManager
     ) {
         $this->extensibleDataObjectConverter = $extensibleDataObjectConverter;
         $this->unitTestFactory = $unitTestFactory;
         $this->resource = $resource;
         $this->saveValidations = $saveValidations;
+        $this->eventManager = $eventManager;
     }
 
     /**
@@ -48,9 +53,18 @@ class UnitTestRepository implements UnitTestRepositoryInterface
             [],
             \Intcomex\UnitTest\Api\Data\UnitTestInterface::class
         );
-        
+        $process = 'save_api';
         try {
-            $unitTestData = $this->saveValidations->validateData($unitTestData, 'save_api');
+            $unitTestData = $this->saveValidations->validateData($unitTestData, $process);
+            $status = $unitTestData['status'];
+		    $this->eventManager->dispatch(
+                "intcomex_unittest_status_{$status}", 
+                [
+                    'unitTest' => $unitTestData,
+                    'unitTestId' => null,
+                    'process' => $process
+                ]
+            );
             $unitTestModel = $this->unitTestFactory->create()->setData($unitTestData);
             $this->resource->save($unitTestModel);
         } catch (\Exception $exception) {
@@ -69,10 +83,11 @@ class UnitTestRepository implements UnitTestRepositoryInterface
         \Intcomex\UnitTest\Api\Data\UnitTestInterface $unitTest,
         $status
     ) {
+        $process = 'status';
         try {
             $unitTestModel = $this->unitTestFactory->create();
             $this->resource->load($unitTestModel, $unitTest->getId());
-            $this->saveValidations->validateData($status, 'status');
+            $this->saveValidations->validateData($status, $process);
             $unitTestModel->setStatus($status)->save();
         } catch (\Exception $exception) {
             throw new CouldNotDeleteException(__(

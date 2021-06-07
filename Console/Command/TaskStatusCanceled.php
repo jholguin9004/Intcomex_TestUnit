@@ -45,7 +45,7 @@ class TaskStatusCanceled extends Command
     }
 
     private function getCollection(){
-        $this->_collection->addFieldToFilter('status', array('neq' => 'canceled'));;
+        $this->_collection->addFieldToFilter('status', array('neq' => 'canceled'));
         return $this->_collection;
     }
 }

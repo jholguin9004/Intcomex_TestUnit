@@ -3,8 +3,9 @@ namespace Intcomex\UnitTest\Model;
 
 use Intcomex\UnitTest\Api\Data\UnitTestInterface;
 use Intcomex\UnitTest\Api\Data\UnitTestInterfaceFactory;
-use Magento\Framework\Api\DataObjectHelper;
 use Intcomex\UnitTest\Helper\SaveValidations;
+use Magento\Framework\Api\DataObjectHelper;
+use Magento\Framework\Event\ManagerInterface as EventManager;
 
 class UnitTest extends \Magento\Framework\Model\AbstractModel implements \Magento\Framework\DataObject\IdentityInterface
 {
@@ -20,6 +21,8 @@ class UnitTest extends \Magento\Framework\Model\AbstractModel implements \Magent
 
 	protected $saveValidations;
 
+	private $eventManager;
+
 	public function __construct(
 		\Magento\Framework\Model\Context $context,
 		\Magento\Framework\Registry $registry,
@@ -28,11 +31,13 @@ class UnitTest extends \Magento\Framework\Model\AbstractModel implements \Magent
 		UnitTestInterfaceFactory $unitTestFactory,
 		DataObjectHelper $dataObjectHelper,
         SaveValidations $saveValidations,
+		EventManager $eventManager,
 		array $data = []
 	){
 		$this->unitTestFactory = $unitTestFactory;
         $this->dataObjectHelper = $dataObjectHelper;
 		$this->saveValidations = $saveValidations;
+		$this->eventManager = $eventManager;
 		parent::__construct($context, $registry, $resource, $resourceCollection, $data);
 	}
 
@@ -49,7 +54,17 @@ class UnitTest extends \Magento\Framework\Model\AbstractModel implements \Magent
 	}
 
 	public function save(){
-		$this->saveValidations->validateData($this->getData(), 'save');
+		$process = 'save';
+		$this->saveValidations->validateData($this->getData(), $process);
+		$status = $this->getData('status');
+		$this->eventManager->dispatch(
+			"intcomex_unittest_status_{$status}", 
+			[
+				'unitTest' => $this->getData(),
+				'unitTestId' => null,
+				'process' => $process
+			]
+		);
         parent::save();
     }
 
