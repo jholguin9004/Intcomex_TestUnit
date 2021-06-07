@@ -13,4 +13,6 @@
 			<argument name="resourceModel" xsi:type="string">Intcomex\UnitTest\Model\ResourceModel\UnitTest\Collection</argument>
 		</arguments>
 	</virtualType>
+	<preference for="Intcomex\UnitTest\Api\UnitTestRepositoryInterface" type="Intcomex\UnitTest\Model\UnitTestRepository"/>
+	<preference for="Intcomex\UnitTest\Api\Data\UnitTestInterface" type="Intcomex\UnitTest\Model\Data\UnitTest"/>
 </config>
