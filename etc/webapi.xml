@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+	<route url="/V1/intcomex/unittest/add" method="POST">
+		<service class="Intcomex\UnitTest\Api\UnitTestRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Intcomex_UnitTest::intcomex_unittest_unittest_save"/>
+		</resources>
+	</route>
+	<route url="/V1/intcomex/unittest/status/:unitTestId/:status" method="GET">
+		<service class="Intcomex\UnitTest\Api\UnitTestRepositoryInterface" method="status"/>
+		<resources>
+			<resource ref="Intcomex_UnitTest::intcomex_unittest_unittest_save"/>
+		</resources>
+	</route>
+</routes>

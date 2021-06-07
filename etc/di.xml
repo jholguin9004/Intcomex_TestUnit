@@ -13,4 +13,26 @@
 			<argument name="resourceModel" xsi:type="string">Intcomex\UnitTest\Model\ResourceModel\UnitTest\Collection</argument>
 		</arguments>
 	</virtualType>
+	<preference for="Intcomex\UnitTest\Api\UnitTestRepositoryInterface" type="Intcomex\UnitTest\Model\UnitTestRepository"/>
+	<preference for="Intcomex\UnitTest\Api\Data\UnitTestInterface" type="Intcomex\UnitTest\Model\Data\UnitTest"/>
+	<type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+				<item name="task:status:canceled" xsi:type="object">Intcomex\UnitTest\Console\Command\TaskStatusCanceled</item>
+            </argument>
+        </arguments>
+    </type>
+	<type name="Intcomex\UnitTest\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Intcomex\UnitTest\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">unittest</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Intcomex\UnitTest\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
